@@ -1,0 +1,73 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a
+    class="navbar-brand"
+    [routerLink]="['/']"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    >eCommerce</a
+  >
+  <button
+    class="navbar-toggler"
+    (click)="isMenuCollapsed = !isMenuCollapsed"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div
+    class="collapse navbar-collapse"
+    [ngbCollapse]="isMenuCollapsed"
+    id="navbarSupportedContent"
+  >
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/shopping-cart']">Shopping cart </a>
+      </li>
+      <ng-template #anonymousUser>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/login']">Login</a>
+        </li>
+      </ng-template>
+      <li
+        class="nav-item dropdown"
+        *ngIf="__authService.user$ | async as user; else anonymousUser"
+        ngbDropdown
+      >
+        <a
+          class="nav-link dropdown-toggle"
+          ngbDropdownToggle
+          id="navbarDropdown"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          {{ user.displayName }}
+        </a>
+        <div class="dropdown-menu" ngbDropdownMenu>
+          <a class="dropdown-item" ngbDropdownItem routerLink="my/orders"
+            >My Order</a
+          >
+          <a class="dropdown-item" ngbDropdownItem routerLink="admin/products"
+            >Manage Products</a
+          >
+          <a class="dropdown-item" ngbDropdownItem routerLink="admin/orders"
+            >Manage Orders</a
+          >
+          <a
+            class="dropdown-item"
+            ngbDropdownItem
+            (click)="logOut()"
+            *ngIf="user"
+            >Log Out</a
+          >
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>

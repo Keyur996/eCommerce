@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 import { LoginComponent } from './auth/login/login.component';
 import { AdminOrdersComponent } from './pages/admin/admin-orders/admin-orders.component';
 import { AdminProductsComponent } from './pages/admin/admin-products/admin-products.component';
@@ -10,6 +10,8 @@ import { MyOrdersComponent } from './pages/my-orders/my-orders.component';
 import { OrderSuccessComponent } from './pages/order-success/order-success.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.component';
+import { UserGuard } from './guards/user.guard';
+import { ProductFormComponent } from './pages/admin/product-form/product-form.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -26,18 +28,23 @@ const routes: Routes = [
   {
     path: 'admin/products',
     component: AdminProductsComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, UserGuard],
   },
   {
     path: 'admin/orders',
     component: AdminOrdersComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, UserGuard],
+  },
+  {
+    path: 'admin/products/new',
+    component: ProductFormComponent,
+    canActivate: [AuthGuard, UserGuard],
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [AuthGuard],
+  providers: [AuthGuard, UserGuard],
 })
 export class AppRoutingModule {}

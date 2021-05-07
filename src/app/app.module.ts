@@ -20,7 +20,12 @@ import { AdminOrdersComponent } from './pages/admin/admin-orders/admin-orders.co
 import { LoginComponent } from './auth/login/login.component';
 import { NgbCollapseModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from './services/auth.service';
-import { AuthGuard } from './auth.guard';
+import { UsersService } from './services/users.service';
+import { AuthGuard } from './guards/auth.guard';
+import { ProductFormComponent } from './pages/admin/product-form/product-form.component';
+import { CategoryService } from './services/category.service';
+import { FormsModule } from '@angular/forms';
+import { ProductService } from './services/product.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +40,7 @@ import { AuthGuard } from './auth.guard';
     AdminProductsComponent,
     AdminOrdersComponent,
     LoginComponent,
+    ProductFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,8 +50,9 @@ import { AuthGuard } from './auth.guard';
     AngularFireDatabaseModule,
     NgbModule,
     NgbCollapseModule,
+    FormsModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, UsersService, CategoryService, ProductService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/models/User.model';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -7,13 +8,16 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
+  appUser!: User | null;
   public isMenuCollapsed = true;
 
-  constructor(public __authService: AuthService) {}
+  constructor(private _authService: AuthService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._authService.appUser$.subscribe((user) => (this.appUser = user));
+  }
 
   logOut = () => {
-    this.__authService.logOut();
+    this._authService.logOut();
   };
 }

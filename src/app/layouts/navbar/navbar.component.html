@@ -1,11 +1,13 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav
+  class="navbar navbar-expand-lg navbar-light bg-light justify-content-between custom-navbar"
+>
   <a
     class="navbar-brand"
     [routerLink]="['/']"
     routerLinkActive="active"
     [routerLinkActiveOptions]="{ exact: true }"
-    >eCommerce</a
-  >
+    >eCommerce
+  </a>
   <button
     class="navbar-toggler"
     (click)="isMenuCollapsed = !isMenuCollapsed"
@@ -24,17 +26,15 @@
     [ngbCollapse]="isMenuCollapsed"
     id="navbarSupportedContent"
   >
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/shopping-cart']">Shopping cart </a>
-      </li>
+    <ul class="navbar-nav ml-auto">
       <ng-template #anonymousUser>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/login']">Login</a>
+        <li class="nav-item" style="padding-top: 5px; padding-right: 10px">
+          <a class="nav-link" [routerLink]="['/login']"> <b>Login</b></a>
         </li>
       </ng-template>
       <li
         class="nav-item dropdown"
+        style="padding-right: 10px"
         *ngIf="appUser; else anonymousUser"
         ngbDropdown
       >
@@ -47,19 +47,25 @@
           aria-haspopup="true"
           aria-expanded="false"
         >
-          {{ appUser.name }}
+          <img [src]="appUser.photoUrl" class="user-image" />
+          &nbsp;
+          <b>{{ appUser.name }}</b>
         </a>
         <div class="dropdown-menu" ngbDropdownMenu>
-          <a class="dropdown-item" ngbDropdownItem routerLink="my/orders"
-            >My Order</a
-          >
+          <a class="dropdown-item" ngbDropdownItem routerLink="my/orders">
+            My Order
+          </a>
           <ng-container *ngIf="appUser.isAdmin">
-            <a class="dropdown-item" ngbDropdownItem routerLink="admin/products"
-              >Manage Products</a
+            <a
+              class="dropdown-item"
+              ngbDropdownItem
+              routerLink="admin/products"
             >
-            <a class="dropdown-item" ngbDropdownItem routerLink="admin/orders"
-              >Manage Orders</a
-            >
+              Manage Products
+            </a>
+            <a class="dropdown-item" ngbDropdownItem routerLink="admin/orders">
+              Manage Orders
+            </a>
           </ng-container>
 
           <a
@@ -67,9 +73,16 @@
             ngbDropdownItem
             (click)="logOut()"
             *ngIf="appUser"
-            >Log Out</a
           >
+            <b>Log Out</b>
+          </a>
         </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link custom-pos" [routerLink]="['/shopping-cart']">
+          <i class="fa fa-shopping-cart custom-icon"></i>
+          &nbsp;<b>Cart</b>
+        </a>
       </li>
     </ul>
   </div>

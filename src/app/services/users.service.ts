@@ -13,6 +13,7 @@ export class UsersService {
     this._db.object('/users/' + user.uid).update({
       name: user.displayName,
       email: user.email,
+      photoUrl: user.photoURL,
     });
   };
 

@@ -28,6 +28,7 @@ import { FormsModule } from '@angular/forms';
 import { ProductService } from './services/product.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { CustomFormsModule } from 'ng2-validation';
+import { SortDirective } from './directives/sort.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +44,7 @@ import { CustomFormsModule } from 'ng2-validation';
     AdminOrdersComponent,
     LoginComponent,
     ProductFormComponent,
+    SortDirective,
   ],
   imports: [
     BrowserModule,

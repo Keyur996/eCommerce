@@ -12,6 +12,9 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   products!: any[];
   filterProducts!: any[];
   private _sub!: Subscription;
+  collectionSize!: number;
+  page: number = 1;
+  pageSize: number = 4;
 
   constructor(
     private _productService: ProductService,
@@ -25,6 +28,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
         return { key: e.key, ...e.payload.val() };
       });
       console.log(this.products);
+      this.collectionSize = this.products.length;
     });
   }
 
@@ -51,5 +55,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
           p.title.toLowerCase().includes(query.toLowerCase())
         )
       : this.products;
+
+    this.collectionSize = this.filterProducts.length;
   };
 }

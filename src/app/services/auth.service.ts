@@ -19,6 +19,7 @@ export class AuthService {
     private _userService: UsersService
   ) {
     this.user$ = this.afAuth.authState;
+    // console.log(this.user$);
   }
 
   logIn = (): void => {
@@ -38,6 +39,7 @@ export class AuthService {
     return this.user$.pipe(
       switchMap((user: any) => {
         if (user !== null) {
+          console.log(user);
           return this._userService.get(user.uid).valueChanges();
         } else {
           return of(null);

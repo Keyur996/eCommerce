@@ -29,6 +29,8 @@ import { ProductService } from './services/product.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { CustomFormsModule } from 'ng2-validation';
 import { SortDirective } from './directives/sort.directive';
+import { ProductCardComponent } from './pages/products/product-card/product-card.component';
+import { ProductFilterComponent } from './pages/products/product-filter/product-filter.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +47,8 @@ import { SortDirective } from './directives/sort.directive';
     LoginComponent,
     ProductFormComponent,
     SortDirective,
+    ProductCardComponent,
+    ProductFilterComponent,
   ],
   imports: [
     BrowserModule,

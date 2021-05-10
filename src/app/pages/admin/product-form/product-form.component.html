@@ -108,15 +108,9 @@
     </div>
   </div>
   <div class="col-md-6">
-    <div class="card" *ngIf="product.title">
-      <div class="card-header">Product Preview</div>
-      <img class="card-img-top img-fluid" [src]="product.imageUrl" />
-      <div class="card-body">
-        <h5 class="card-title">{{ product.title }}</h5>
-        <p class="card-text" *ngIf="product.price > 0">
-          {{ product.price | currency: "USD":true }}
-        </p>
-      </div>
-    </div>
+    <app-product-card
+      [product]="product"
+      [show-actions]="false"
+    ></app-product-card>
   </div>
 </div>

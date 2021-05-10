@@ -26,6 +26,16 @@ const routes: Routes = [
   },
   { path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuard] },
   {
+    path: 'admin/products/new',
+    component: ProductFormComponent,
+    canActivate: [AuthGuard, UserGuard],
+  },
+  {
+    path: 'admin/products/:id',
+    component: ProductFormComponent,
+    canActivate: [AuthGuard, UserGuard],
+  },
+  {
     path: 'admin/products',
     component: AdminProductsComponent,
     canActivate: [AuthGuard, UserGuard],
@@ -33,11 +43,6 @@ const routes: Routes = [
   {
     path: 'admin/orders',
     component: AdminOrdersComponent,
-    canActivate: [AuthGuard, UserGuard],
-  },
-  {
-    path: 'admin/products/new',
-    component: ProductFormComponent,
     canActivate: [AuthGuard, UserGuard],
   },
 ];

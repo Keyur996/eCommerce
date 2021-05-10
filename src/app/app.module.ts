@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,11 +22,12 @@ import { LoginComponent } from './auth/login/login.component';
 import { NgbCollapseModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from './services/auth.service';
 import { UsersService } from './services/users.service';
-import { AuthGuard } from './guards/auth.guard';
 import { ProductFormComponent } from './pages/admin/product-form/product-form.component';
 import { CategoryService } from './services/category.service';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from './services/product.service';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { CustomFormsModule } from 'ng2-validation';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +46,7 @@ import { ProductService } from './services/product.service';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
@@ -51,8 +54,21 @@ import { ProductService } from './services/product.service';
     NgbModule,
     NgbCollapseModule,
     FormsModule,
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: false,
+      closeButton: true,
+    }),
+    CustomFormsModule,
   ],
-  providers: [AuthService, UsersService, CategoryService, ProductService],
+  providers: [
+    AuthService,
+    UsersService,
+    CategoryService,
+    ProductService,
+    ToastrService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

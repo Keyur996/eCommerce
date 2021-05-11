@@ -49,9 +49,30 @@
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col" [appSort]="filterProducts" data-order="desc" data-name="title">Title</th>
-      <th scope="col" [appSort]="filterProducts" data-order="desc" data-name="price">Price</th>
-      <th scope="col" [appSort]="filterProducts" data-order="desc" data-name="category">Category</th>
+      <th
+        scope="col"
+        [appSort]="filterProducts"
+        data-order="desc"
+        data-name="title"
+      >
+        Title
+      </th>
+      <th
+        scope="col"
+        [appSort]="filterProducts"
+        data-order="desc"
+        data-name="price"
+      >
+        Price
+      </th>
+      <th
+        scope="col"
+        [appSort]="filterProducts"
+        data-order="desc"
+        data-name="category"
+      >
+        Category
+      </th>
       <th scope="col">Action</th>
     </tr>
   </thead>
@@ -88,4 +109,3 @@
   [pageSize]="pageSize"
   class="d-flex justify-content-center"
 ></ngb-pagination>
-<!--         *ngFor="let country of countries | listFilter: searchTerm | slice: (page-1) * pageSize : page * pageSize; index as i" -->

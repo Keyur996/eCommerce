@@ -31,6 +31,7 @@ import { CustomFormsModule } from 'ng2-validation';
 import { SortDirective } from './directives/sort.directive';
 import { ProductCardComponent } from './pages/products/product-card/product-card.component';
 import { ProductFilterComponent } from './pages/products/product-filter/product-filter.component';
+import { ShoppingCartService } from './services/shopping-cart.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,6 +75,7 @@ import { ProductFilterComponent } from './pages/products/product-filter/product-
     CategoryService,
     ProductService,
     ToastrService,
+    ShoppingCartService,
   ],
   bootstrap: [AppComponent],
 })

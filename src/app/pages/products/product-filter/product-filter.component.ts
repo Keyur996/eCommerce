@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Category } from 'src/app/models/Category.model';
 import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { CategoryService } from 'src/app/services/category.service';
 })
 export class ProductFilterComponent implements OnInit {
   @Input() category!: string | null;
-  categories: any[] = [];
+  categories!: Category[];
   constructor(private categoryService: CategoryService) {}
 
   ngOnInit(): void {

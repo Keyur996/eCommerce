@@ -19,6 +19,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   id!: string | null;
   categories!: any[];
   product: Product = {
+    key: '',
     title: '',
     price: 0,
     category: '',

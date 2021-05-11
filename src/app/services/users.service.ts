@@ -7,8 +7,10 @@ import { User } from '../models/User.model';
   providedIn: 'root',
 })
 export class UsersService {
+  // we Make User Profile Section in Future
   constructor(private _db: AngularFireDatabase) {}
 
+  // Save Firebase User into Real time Database
   save = (user: firebase.default.User): void => {
     this._db.object('/users/' + user.uid).update({
       name: user.displayName,
@@ -17,6 +19,7 @@ export class UsersService {
     });
   };
 
+  // get saved user from Firebase
   get = (uid: string): AngularFireObject<User> => {
     return this._db.object('/users/' + uid);
   };

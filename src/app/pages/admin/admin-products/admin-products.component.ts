@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { SnapshotAction } from '@angular/fire/database';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
+import { Product } from 'src/app/models/Product.model';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -9,8 +11,8 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./admin-products.component.css'],
 })
 export class AdminProductsComponent implements OnInit, OnDestroy {
-  products!: any[];
-  filterProducts!: any[];
+  products!: Product[];
+  filterProducts!: Product[];
   private _sub!: Subscription;
   collectionSize!: number;
   page: number = 1;
@@ -31,10 +33,6 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
       this.collectionSize = this.products.length;
     });
   }
-
-  ngOnDestroy = () => {
-    this._sub.unsubscribe();
-  };
 
   onDelete = (content: any, id: string) => {
     this.modalService
@@ -57,5 +55,9 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
       : this.products;
 
     this.collectionSize = this.filterProducts.length;
+  };
+
+  ngOnDestroy = () => {
+    this._sub.unsubscribe();
   };
 }

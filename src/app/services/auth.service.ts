@@ -37,13 +37,11 @@ export class AuthService {
 
   get appUser$(): Observable<User | null> {
     return this.user$.pipe(
-      switchMap((user: any) => {
-        if (user !== null) {
-          console.log(user);
-          return this._userService.get(user.uid).valueChanges();
-        } else {
-          return of(null);
-        }
+      switchMap((user: firebase.default.User | null) => {
+        if (user === null) return of(null);
+
+        // console.log(user);
+        return this._userService.get(user.uid).valueChanges();
       })
     );
   }

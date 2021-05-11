@@ -34,3 +34,9 @@
 .logo-text {
   color: coral;
 }
+
+.badge-pos {
+  position: relative;
+  top: -20px;
+  right: 55px;
+}

@@ -87,7 +87,12 @@
       <li class="nav-item">
         <a class="nav-link custom-pos" [routerLink]="['/shopping-cart']">
           <i class="fa fa-shopping-cart custom-icon"></i>
-          &nbsp;<b>Cart</b>
+          &nbsp;<b
+            >Cart
+            <span class="badge badge-warning badge-pill badge-pos">
+              {{ itemCount }}
+            </span>
+          </b>
         </a>
       </li>
     </ul>

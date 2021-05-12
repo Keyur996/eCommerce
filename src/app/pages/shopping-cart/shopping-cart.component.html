@@ -1,1 +1,49 @@
-<p>shopping-cart works!</p>
+<h1>Shopping Cart</h1>
+<ng-container *ngIf="itemCount > 0; else noItem">
+  <div>
+    <p>You have {{ itemCount }} in your cart...</p>
+  </div>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th style="width: 25%">Image</th>
+        <th style="width: 25%">Name</th>
+        <th style="width: 25%">Quantity</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items">
+        <td class="text-center">
+          <img
+            class="img"
+            style="border-radius: 50%; width: 65px; height: 65px"
+            [src]="item.product.imageUrl"
+            alt="product.title"
+          />
+        </td>
+        <td>{{ item.product.title }}</td>
+        <td>
+          <app-product-quantity
+            [product]="item.product"
+            [shopping-cart]="shoppingCart"
+          ></app-product-quantity>
+        </td>
+        <td>{{ item.product.price * item.quantity | currency: "USD" }}</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>{{ totalPrice | currency: "USD" }}</td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <button (click)="clearCart()" class="btn btn-danger btn-sm">
+    Clear Shooping Cart
+  </button>
+</ng-container>
+<ng-template #noItem> No Items in Cart </ng-template>

@@ -32,6 +32,7 @@ import { SortDirective } from './directives/sort.directive';
 import { ProductCardComponent } from './pages/products/product-card/product-card.component';
 import { ProductFilterComponent } from './pages/products/product-filter/product-filter.component';
 import { ShoppingCartService } from './services/shopping-cart.service';
+import { ProductQuantityComponent } from './pages/products/product-quantity/product-quantity.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,6 +51,7 @@ import { ShoppingCartService } from './services/shopping-cart.service';
     SortDirective,
     ProductCardComponent,
     ProductFilterComponent,
+    ProductQuantityComponent,
   ],
   imports: [
     BrowserModule,

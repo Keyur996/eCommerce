@@ -4,7 +4,7 @@ import {
   AngularFireObject,
   SnapshotAction,
 } from '@angular/fire/database';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { Product } from '../models/Product.model';
 import { ShoppingCart } from '../models/ShoppingCart.model';
@@ -14,17 +14,41 @@ import { ShoppingCartItems } from '../models/ShoppingCartItems.model';
   providedIn: 'root',
 })
 export class ShoppingCartService {
-  constructor(private _db: AngularFireDatabase) {}
+  itemCount: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+
+  constructor(private _db: AngularFireDatabase) {
+    this.getCart().then((cart) => {
+      cart.subscribe((cart) => {
+        let items = { ...cart.payload.val()?.items };
+        let itemCount = 0;
+        for (let productId in items) itemCount += items[productId].quantity;
+        this.itemCount.next(itemCount);
+      });
+    });
+  }
+
+  getCart = async (): Promise<Observable<SnapshotAction<ShoppingCart>>> => {
+    let cartId = await this.getOrCreateCartId();
+    return this._db.object<ShoppingCart>(`/carts/${cartId}`).snapshotChanges();
+  };
+
+  addToCart = async (product: Product) => {
+    this.updateQuantity(product, 1);
+  };
+
+  removeFromCart = async (product: Product) => {
+    this.updateQuantity(product, -1);
+  };
+
+  clearCart = async () => {
+    let cartId = await this.getOrCreateCartId();
+    return this._db.object(`/carts/${cartId}/items`).remove();
+  };
 
   private create = () => {
     return this._db.list<ShoppingCart>('/carts/').push({
       dateCreated: new Date().getTime(),
     });
-  };
-
-  getCart = async (): Promise<Observable<SnapshotAction<ShoppingCart>>> => {
-    let cartId = await this.getOrCreateCartId();
-    return this._db.object<ShoppingCart>(`/carts/${cartId}`).snapshotChanges();
   };
 
   private getItems = (
@@ -45,16 +69,7 @@ export class ShoppingCartService {
     return cartId;
   }
 
-  addToCart = async (product: Product) => {
-    this.updateQuantity(product, 1);
-  };
-
-  removeFromCart = async (product: Product) => {
-    this.updateQuantity(product, -1);
-  };
-
-  updateQuantity = async (product: Product, change: number) => {
-    console.log(product.key);
+  private updateQuantity = async (product: Product, change: number) => {
     let cartId = await this.getOrCreateCartId();
     let items$ = this.getItems(cartId, product.key);
 

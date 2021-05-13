@@ -60,7 +60,7 @@ export class ShoppingCartService {
     );
   };
 
-  async getOrCreateCartId(): Promise<string | null> {
+  private async getOrCreateCartId(): Promise<string | null> {
     let cartId = localStorage.getItem('cartId');
     if (cartId) return cartId;
 

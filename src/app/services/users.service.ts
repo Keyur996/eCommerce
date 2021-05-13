@@ -10,7 +10,7 @@ export class UsersService {
   // we Make User Profile Section in Future
   constructor(private _db: AngularFireDatabase) {}
 
-  // Save Firebase User into Real time Database
+  // Save Firebase User into Real time Database - app.component.ts
   save = (user: firebase.default.User): void => {
     this._db.object('/users/' + user.uid).update({
       name: user.displayName,

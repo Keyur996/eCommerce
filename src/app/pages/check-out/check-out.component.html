@@ -1,1 +1,88 @@
-<p>check-out works!</p>
+<!-- <h4>Check Out Page.</h4> -->
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header text-center"><b>Check Out</b></div>
+      <div class="card-body">
+        <form
+          #checkOut="ngForm"
+          class="form"
+          (ngSubmit)="onSubmit(checkOut.value)"
+        >
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              #name="ngModel"
+              id="name"
+              type="text"
+              name="name"
+              ngModel
+              class="form-control"
+              placeholder="Name"
+              required
+            />
+            <div
+              class="alert alert-warning"
+              *ngIf="name.touched && name.invalid"
+            >
+              Name is required
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="addressLine1">Address</label>
+            <input
+              #addressLine1="ngModel"
+              id="addressLine1"
+              type="text"
+              name="addressLine1"
+              placeholder="Address Line 1"
+              ngModel
+              class="form-control mb-2"
+              required
+            />
+            <input
+              #addressLine2="ngModel"
+              type="text"
+              name="addressLine2"
+              ngModel
+              placeholder="Address Line 2"
+              class="form-control"
+            />
+            <div
+              class="alert alert-warning"
+              *ngIf="addressLine1.touched && addressLine1.invalid"
+            >
+              Line 1 is required
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="city">City</label>
+            <input
+              #city="ngModel"
+              id="city"
+              type="text"
+              name="city"
+              placeholder="City"
+              ngModel
+              class="form-control"
+              required
+            />
+            <div
+              class="alert alert-warning"
+              *ngIf="city.touched && city.invalid"
+            >
+              city is required
+            </div>
+          </div>
+          <button
+            type="submit"
+            [disabled]="!checkOut.valid"
+            class="btn btn-primary"
+          >
+            Place Order
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
